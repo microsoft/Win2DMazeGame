@@ -19,8 +19,8 @@ This game was written on Windows 10 (Build 2004) using Visual Studio 2019.
 ## Instructions
 
 1. Install the tools - you will need [Visual Studio](https://visualstudio.microsoft.com/). The free Community edition will work perfectly.
-2. Download the project from this repo.
-3. Load it into Visual Studio.
+2. Download the project from this repo. The simplest way to do this is to select Download ZIP from the green CODE button, and unarchive all the files.
+3. Load it into Visual Studio. You can double-click on game.sln to do this.
 4. Build and it and try it out! Make sure the target is set to x86 (in most cases) and press F5. The controls are W, A, S and D.
 5. Adapt, improve and learn!
 
