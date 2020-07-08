@@ -1,4 +1,4 @@
-﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 
 
@@ -21,7 +21,7 @@ namespace Game
             direction = start_direction;
         }
 
-        public void move(int speed, Maze gamemaze)
+        public void Move(int speed, Maze gamemaze)
         {
             // Update the position of the baddie depending on the direction.
             // We can change the speed to make them faster or slower, and so
@@ -29,10 +29,10 @@ namespace Game
 
             switch (direction)
             {
-                case 1:y = y - speed; break;
-                case 2:x = x + speed; break;
-                case 4:y = y + speed; break;
-                case 8:x = x - speed; break;
+                case 1: y -= speed; break;
+                case 2: x += speed; break;
+                case 4: y += speed; break;
+                case 8: x -= speed; break;
 
                 default: break;
             }
@@ -42,7 +42,7 @@ namespace Game
 
             if ((x % 64 == 0) && (y % 64 == 0))
             {
-                
+
                 // Map the screen co-ordinates to the map co-ordinates 
                 // (the screen is 1024 by 1024, the maze data is 16 by 16)
 
@@ -50,7 +50,7 @@ namespace Game
                 int my = (y / 64);
 
                 // Get the number that tells us the possible directions at this tile
-                int possible_directions = gamemaze.getTile(my, mx);
+                int possible_directions = gamemaze.GetTile(my, mx);
 
                 // Define the opposite value to the current direction,
                 // because we don't want to double back
@@ -80,10 +80,10 @@ namespace Game
         }
 
         // Draw the baddie. Needs a reference to the canvas
-        public void draw(CanvasDrawEventArgs args, CanvasBitmap dino)
+        public void Draw(CanvasDrawEventArgs args, CanvasBitmap dino)
         {
             args.DrawingSession.DrawImage(dino, x + 4, y + 4);
-       
+
         }
     }
 }
