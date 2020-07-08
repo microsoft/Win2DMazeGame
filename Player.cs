@@ -1,4 +1,4 @@
-﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 
 
@@ -6,11 +6,12 @@ namespace Game
 {
 
     // This class controls and draws the player object.
-    public class Player {
+    public class Player
+    {
         private int x, y, direction;
-            
-        public int score { get; set; }
-        public int newDirection { get; set; }
+
+        public int Score { get; set; }
+        public int NewDirection { get; set; }
 
         // Call this method to set starting position and the direction that the baddie will start going in.
         public Player(int start_x, int start_y, int start_direction)
@@ -21,14 +22,14 @@ namespace Game
         }
 
 
-        public void move(Maze gamemaze)
+        public void Move(Maze gamemaze)
         {
             switch (direction)
             {
-                case 1: y = y - 8; break;
-                case 2: x = x + 8; break;
-                case 4: y = y + 8; break;
-                case 8: x = x - 8; break;
+                case 1: y -= 8; break;
+                case 2: x += 8; break;
+                case 4: y += 8; break;
+                case 8: x -= 8; break;
 
                 default: break;
             }
@@ -48,24 +49,24 @@ namespace Game
                 int my = (y / 64);
 
                 // Check for a dot being eaten
-                if ((gamemaze.getTile(my, mx) & 16) != 0)
+                if ((gamemaze.GetTile(my, mx) & 16) != 0)
                 {
-                    gamemaze.setTile(my, mx, gamemaze.getTile(my, mx) - 16);
-                    score = score + 1;
+                    gamemaze.SetTile(my, mx, gamemaze.GetTile(my, mx) - 16);
+                    Score += 1;
                 }
 
 
                 // Get the number that tells us the possible directions at this tile
-                int possible_directions = gamemaze.getTile(my, mx);
+                int possible_directions = gamemaze.GetTile(my, mx);
 
                 int current_direction = direction;
-                
-                
+
+
                 // If the player has pressed a key, let's consider that a request to change direction.
-                // We can check if it's possible because we know for any tile what directions are possible.
+                // We can check if it's possible because we know for any tile what directions are available.
                 // If the player cannot change in that direction, they'll just stop.
 
-                if (newDirection == 0)
+                if (NewDirection == 0)
                 {
                     // The player hasn't requested a change in direction
                     // So let's see if they can move in the current direction
@@ -79,10 +80,10 @@ namespace Game
                 else // The player has requested a change in direction
                 {
                     // Is it ok?
-                    if ((newDirection & possible_directions) != 0)
+                    if ((NewDirection & possible_directions) != 0)
                     {
                         // yes, it's allowed
-                        direction = newDirection;
+                        direction = NewDirection;
                     }
                     else
                     {
@@ -100,15 +101,15 @@ namespace Game
         }
 
         // Draw the player. Needs a reference to the canvas
-        public void draw(CanvasDrawEventArgs args, CanvasBitmap ninjacat)
+        public void Draw(CanvasDrawEventArgs args, CanvasBitmap ninjacat)
         {
             args.DrawingSession.DrawImage(ninjacat, x, y);
         }
 
-        public bool check(Baddie badguy)
+        public bool Check(Baddie badguy)
         {
             // Check the distance between the player and a Baddie
-            if ((((x - badguy.x) * (x - badguy.x)) < 256) && (((y - badguy.y) * ( y - badguy.y)) < 256))
+            if ((((x - badguy.x) * (x - badguy.x)) < 256) && (((y - badguy.y) * (y - badguy.y)) < 256))
             {
                 return true;
             }
