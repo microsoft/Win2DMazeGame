@@ -1,14 +1,36 @@
+# Win2D-MazeGame
 
-# Contributing
+The skeleton of a classic maze chase game for Windows 10, written in C# and using Win2D.
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+![](gamegridpic.png)
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+## Introduction
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+If you’re looking for a project to keep the kids happy, or a way to re-create the 1980’s home computer boom, you might want to try writing your own classic video game. 
+
+A programming library for Windows 10 called [Win2D](https://github.com/Microsoft/Win2D) is perfect for drawing and animating the kind of graphics that defined early video games. 
+
+This project uses Win2D to create the start of a maze chase game – one that you can use as the basis for your own game.  It's written in C#, and comes complete with some basic graphics to start you off.
+
+## Requirements
+
+This game was written on Windows 10 (Build 2004) using Visual Studio 2019.
+
+## Instructions
+
+1. Install the tools - you will need [Visual Studio](https://visualstudio.microsoft.com/). The free Community edition will work perfectly.
+2. Download the project from this repo.
+3. Load it into Visual Studio.
+4. Build and it and try it out! Make sure the target is set to x86 (in most cases) and press F5. The controls are W, A, S and D.
+5. Adapt, improve and learn!
+
+## Details
+
+This is a simple maze chase / eat the dots game that demonstrates using Win2D to display and move images.
+The game screen is a 1024 by 1024 canvas object. A single bitmap displays a maze image, but really the maze
+is a 16 by 16 array of integers with each element defining the possible directions the player or baddie can 
+move in. The source code is full of comments to help you.
+
+The images move smoothly until they are centered in a tile, and only then can they change direction.
+
+No "game over" or scoring events are present - that's up to you!
