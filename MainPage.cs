@@ -1,25 +1,11 @@
-﻿using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Globalization.NumberFormatting;
-using Windows.Security.Cryptography.Core;
 using Windows.UI;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Maps;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 
 namespace Game
@@ -44,7 +30,7 @@ namespace Game
         // The graphics for the player and the baddies
         CanvasBitmap ninjacat, dino;
 
-        public DispatcherTimer timer { get; private set; }
+        public DispatcherTimer Timer { get; private set; }
 
         // Declare the player object and three baddies
         private Player player = new Player(512, 512 - 64, 0);
@@ -61,19 +47,19 @@ namespace Game
         public MainPage()
         {
             this.InitializeComponent();
-           
+
             // Set the score to zero - the game doesn't currently check that all dots are eaten!
             // But if this is 122, the player has cleared the level.
-            player.score = 0;
+            player.Score = 0;
 
             // Start the timer going - this will update the display and move the characters around.
             // When the baddies catch the player, the timer is stopped. In a real game, the "game over"
             // message would be displayed.
 
-            this.timer = new DispatcherTimer();
-            this.timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
-            this.timer.Tick += timer_Tick;
-            this.timer.Start();
+            this.Timer = new DispatcherTimer();
+            this.Timer.Interval = new TimeSpan(0, 0, 0, 0, 15);
+            this.Timer.Tick += timer_Tick;
+            this.Timer.Start();
 
         }
 
@@ -98,43 +84,43 @@ namespace Game
             for (int y = 0; y < 16; y++)
                 for (int x = 0; x < 16; x++)
                 {
-                    if ((GameMaze.getTile(y, x) & 16) != 0)
+                    if ((GameMaze.GetTile(y, x) & 16) != 0)
                     {
                         args.DrawingSession.DrawEllipse(32 + x * 64, 32 + y * 64, 4, 4, Colors.Blue, 8);
                     }
                 }
 
-          
+
 
             // Move the player to the new position, draw it.
             // Do the same thing for the baddies.
 
-            player.move(GameMaze);
-            player.draw(args, ninjacat);
+            player.Move(GameMaze);
+            player.Draw(args, ninjacat);
 
-            Ringo.move(4, GameMaze);  // The first parameter is the speed - it must be 1, 2, 4,8, 16 or 32
-            George.move(8, GameMaze);
-            Paul.move(8, GameMaze);
+            Ringo.Move(4, GameMaze);  // The first parameter is the speed - it must be 1, 2, 4,8, 16 or 32
+            George.Move(8, GameMaze);
+            Paul.Move(8, GameMaze);
 
-            Ringo.draw(args, dino);
-            George.draw(args, dino);
-            Paul.draw(args, dino);
+            Ringo.Draw(args, dino);
+            George.Draw(args, dino);
+            Paul.Draw(args, dino);
 
 
             // Now draw the score 
 
-            args.DrawingSession.DrawText("Score: " + player.score.ToString("0000"), 400, 20, Colors.Yellow);
+            args.DrawingSession.DrawText("Score: " + player.Score.ToString("0000"), 400, 20, Colors.Yellow);
 
 
             // Check to see if the player has been caught by a dino.
             // The simplest way is to check that the distance between
             // them is smaller than a specific threshold.
 
-            if (player.check(Ringo) || player.check(George) || player.check(Paul))
+            if (player.Check(Ringo) || player.Check(George) || player.Check(Paul))
             {
                 // Player has been caught!
                 // For now, just stop the timer.
-                timer.Stop();
+                Timer.Stop();
             }
         }
 
@@ -168,7 +154,7 @@ namespace Game
                 default: d = 0; break;
             }
 
-            player.newDirection = d;
+            player.NewDirection = d;
 
         }
 
