@@ -19,7 +19,7 @@ This game was written on Windows 10 (Build 2004) using Visual Studio 2019.
 ## Instructions
 
 1. Install the tools - you will need [Visual Studio](https://visualstudio.microsoft.com/). The free Community edition will work perfectly.
-2. Download the project from this repo. The simplest way to do this is to select Download ZIP from the green CODE button, and unarchive all the files.
+2. Download the project from this repo. The simplest way to do this is to select Download ZIP from the green CODE button, and extract all the files.
 3. Load it into Visual Studio. You can double-click on game.sln to do this.
 4. Build and it and try it out! Make sure the target is set to x86 (in most cases) and press F5. The controls are W, A, S and D.
 5. Adapt, improve and learn!
@@ -27,10 +27,10 @@ This game was written on Windows 10 (Build 2004) using Visual Studio 2019.
 ## Details
 
 This is a simple maze chase / eat the dots game that demonstrates using Win2D to display and move images.
-The game screen is a 1024 by 1024 canvas object. A single bitmap displays a maze image, but really the maze
+The game screen is a 1024 by 1024 canvas object. A single bitmap contains the maze image, but behind the scenes the maze
 is a 16 by 16 array of integers with each element defining the possible directions the player or baddie can 
 move in. The source code is full of comments to help you.
 
 The images move smoothly until they are centered in a tile, and only then can they change direction.
 
-No "game over" or scoring events are present - that's up to you!
+No "game over" or high scoring events are present. When the player is caught, the game feezes. What happens next is up to you!
