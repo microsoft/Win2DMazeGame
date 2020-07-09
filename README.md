@@ -26,11 +26,31 @@ This game was written on Windows 10 (Build 2004) using Visual Studio 2019.
 
 ## Details
 
-This is a simple maze chase / eat the dots game that demonstrates using Win2D to display and move images.
-The game screen is a 1024 by 1024 canvas object. A single bitmap contains the maze image, but behind the scenes the maze
-is a 16 by 16 array of integers with each element defining the possible directions the player or baddie can 
-move in. The source code is full of comments to help you.
+This is a simple maze chase / eat the dots game that demonstrates using Win2D to display and move images. 
 
-The images move smoothly until they are centered in a tile, and only then can they change direction.
+### Maze.cs
 
-No "game over" or high scoring events are present. When the player is caught, the game feezes. What happens next is up to you!
+This class defines the maze object. The game screen is a 1024 by 1024 canvas object, and while a single bitmap contains the maze image, behind the scenes the maze
+is a 16 by 16 array of integers with each element defining the possible directions the player or baddie can move in. When a player or baddie reaches a new tile in the maze (they move pixel by pixel, but only when line up with a tile perfectly can they change direction) they look at the maze data for that location. The data tells them which directions they can move in, and also if there is a "dot" present.
+
+### Player.cs
+
+The player object contains the code that draws and moves the player's game character. The most involved code defines the action to take when the player's sprite reaches a tile junction, depending on what the keys (W, A, S or D) are being held down and what directions are available.
+
+### Baddie.cs
+
+The baddie object chases the player around the maze. In fact, the baddie currently picks a direction at random (as long as it's not doubling back), so this is a great opportunity to add some intelligence to make the baddie pick a direction that will move them closer to the player. As with the player object, a new direction is only considered when the sprite is at the tile junction. Baddies can move at different speeds, as long as the speeds are a power of 2. There are three baddies currently defined, and more can be added by copying the code already present in the MainPage.cs class.
+
+### MainPage.cs
+
+This is the "code behind" file for the MainPage.xaml file which defines the Win2D canvas object (where graphics can be drawn) and also sets up keyboard input events. The purpose of the code in MainPage.cs is to load the image files, and also create the player and baddie objects, and then move them around the screen based on a timer. The test for collisions is also performed in this class.
+
+## Suggestions for features
+
+Game states need to be defined: for example, these could be "get ready", "game running", and "game over". 
+
+Lives need to be implemented. Traditionally you get three lives. 
+
+At the moment nothing happens when the baddies get too close to the player - other than the game stops moving. This is where you would "lose a life" and go to a game over screen. Likewise, nothing happens when the player has passed over all the dots. You might want the next level to have more baddies, or baddies which move faster or both.
+
+As mentioned, the baddies are not smart and pick random directions. Adding some code that picks a direction closer to the player will make for a much more challenging game. 
